@@ -43,7 +43,18 @@ export function useFocusOnBlur(
       if (!options.visible) return;
       const nextActiveElement = getNextActiveElementOnBlur(event);
       if (!isActualElement(nextActiveElement)) {
-        scheduleFocus();
+        const dialog = event.currentTarget;
+        requestAnimationFrame(() => {
+          if (!isActualElement(getActiveElement(dialog))) {
+            warning(
+              !dialog,
+              "Can't focus dialog after a nested element got blurred because `ref` wasn't passed to the component",
+              "See https://reakit.io/docs/dialog"
+            );
+            dialog?.focus();
+          }
+        });
+        // scheduleFocus();
       }
     },
     [options.visible]

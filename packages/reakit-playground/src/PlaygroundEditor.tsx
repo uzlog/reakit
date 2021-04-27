@@ -2,6 +2,9 @@ import * as React from "react";
 import { Controlled as CodeMirror } from "react-codemirror2";
 import { useOptions, useProps } from "reakit-system";
 import { useLiveRef, canUseDOM } from "reakit-utils";
+import { transform, availablePresets } from "@babel/standalone";
+import { format } from "prettier/standalone";
+import parser from "prettier/parser-babel";
 import { PlaygroundActions, PlaygroundStateReturn } from "./usePlaygroundState";
 
 if (typeof navigator !== "undefined") {
@@ -94,7 +97,18 @@ export function PlaygroundEditor({
     return () => cancelAnimationFrame(id);
   }, []);
 
-  const value = options.readOnly ? options.code.trim() : options.code;
+  let value = options.readOnly ? options.code.trim() : options.code;
+
+  if (mode === "tsx") {
+    // eslint-disable-next-line
+    value = value;
+    const { code: compiledCode } = transform(code, {
+      filename: "file.tsx",
+      retainLines: true,
+      presets: [[availablePresets.typescript]],
+    });
+    value = format(compiledCode!, { parser: "babel", plugins: [parser] });
+  }
 
   if (!canUseDOM || !ready) {
     return (
@@ -130,7 +144,10 @@ export function PlaygroundEditor({
         readOnly: _readOnly,
         lineWrapping: options.lineWrapping,
         tabSize: options.tabSize,
-        mode: options.mode,
+        mode:
+          options.mode === "tsx"
+            ? { name: "jsx", base: { name: "javascript", typescript: true } }
+            : options.mode,
         autoRefresh: options.autoRefresh,
         cursorBlinkRate: _readOnly ? -1 : 530,
         styleActiveLine: !_readOnly,

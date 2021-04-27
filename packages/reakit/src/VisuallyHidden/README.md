@@ -20,12 +20,12 @@ Learn more in [Get started](/docs/get-started/).
 
 <!-- eslint-disable import/no-unresolved -->
 
-```jsx
-import { Button } from "reakit/Button";
+```tsx
+import { Button, ButtonProps } from "reakit/Button";
 import { VisuallyHidden } from "reakit/VisuallyHidden";
 import UniversalAccess from "./UniversalAccess";
 
-function Example() {
+export default function Example(props: ButtonProps) {
   return (
     <Button>
       <VisuallyHidden>Universal Access</VisuallyHidden> <UniversalAccess />

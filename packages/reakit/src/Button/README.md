@@ -23,7 +23,7 @@ Learn more in [Get started](/docs/get-started/).
 ```jsx
 import { Button } from "reakit/Button";
 
-function Example() {
+export default function Example() {
   return <Button>Button</Button>;
 }
 ```

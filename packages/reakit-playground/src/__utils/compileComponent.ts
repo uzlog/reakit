@@ -1,8 +1,15 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { transform } from "buble";
+// import { transform } from "buble";
+import {
+  transform,
+  availablePresets,
+  availablePlugins,
+} from "@babel/standalone";
 import deps from "../__deps";
 import { importToRequire } from "./importToRequire";
+
+console.log(availablePresets);
 
 export function compileComponent(
   code: string,
@@ -13,12 +20,10 @@ export function compileComponent(
     react: React,
     "react-dom": ReactDOM,
   };
-  const fullCode = `{
-${importToRequire(code)}
-if (typeof ${componentName} !== "undefined") {
-  return ${componentName};
-}
-}`;
+  //   const fullCode = `
+  // ${importToRequire(code)}
+  // export default ${componentName};
+  // `;
   const req = (path: keyof typeof deps) => {
     if (path in deps) {
       return deps[path];
@@ -31,13 +36,20 @@ if (typeof ${componentName} !== "undefined") {
     }
     throw new Error(`Unable to resolve path to module '${path}'.`);
   };
-  const { code: compiledCode } = transform(fullCode, {
-    transforms: {
-      dangerousTaggedTemplateString: true,
-    },
-    objectAssign: true,
+  const { code: compiledCode } = transform(code, {
+    filename: "file.tsx",
+    presets: [
+      [availablePresets.env],
+      availablePresets.react,
+      [availablePresets.typescript],
+    ],
   });
   // eslint-disable-next-line no-new-func
-  const fn = new Function("require", "React", compiledCode);
-  return fn(req, React);
+  const fn = new Function(
+    "require",
+    "exports",
+    "React",
+    `${compiledCode}; return exports.default`
+  );
+  return fn(req, {}, React);
 }

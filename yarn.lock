@@ -2129,6 +2129,11 @@
   resolved "https://registry.yarnpkg.com/@babel/standalone/-/standalone-7.12.9.tgz#2da8a223b44498a1e7ca5b83d4e9d010088b0036"
   integrity sha512-7SFBBNPjEZnN3dlnOcTa08XLkGUUmZX6Aab2rdeVBfI/bBaZXRRMx5XIMU8piZMVJI+jxu4j7gu0E/yRWmtS4w==
 
+"@babel/standalone@^7.13.17":
+  version "7.13.17"
+  resolved "https://registry.yarnpkg.com/@babel/standalone/-/standalone-7.13.17.tgz#921b82a11a80ce824589516736d629efc53297aa"
+  integrity sha512-Y9P198T45MIIu+AvGOCcjsdKl79+BCL2nA+6ODA5p/DhGzymvzaTgtzvNcjZDcJmbPszcmohjLLgvma3tmvVtg==
+
 "@babel/template@^7.10.4", "@babel/template@^7.3.3":
   version "7.10.4"
   resolved "https://registry.yarnpkg.com/@babel/template/-/template-7.10.4.tgz#3251996c4200ebc71d1a8fc405fba940f36ba278"
@@ -4705,6 +4710,13 @@
   integrity sha512-bBKm+2VPJcMRVwNhxKu8W+5/zT7pwNEqeokFOmbvVSqGzFneNxYcEBro9Ac7/N9tlsaPYnZLK8J1LWKkMsLAew==
   dependencies:
     "@babel/types" "^7.0.0"
+
+"@types/babel__standalone@^7.1.3":
+  version "7.1.3"
+  resolved "https://registry.yarnpkg.com/@types/babel__standalone/-/babel__standalone-7.1.3.tgz#e275639469c056f7cecc4963c88a803f028236dd"
+  integrity sha512-gj2Uvh8NT7+/0liAKMBtAqWspdg1LGZ471AD9Rdvrg1mB0q45qnl21dQPGz/ZtMYRgem0Aj/CUVQYHP3QDb5Gw==
+  dependencies:
+    "@babel/core" "^7.1.0"
 
 "@types/babel__template@*":
   version "7.0.2"
@@ -19177,7 +19189,7 @@ prettier-linter-helpers@^1.0.0:
   dependencies:
     fast-diff "^1.1.2"
 
-prettier@2.2.1:
+prettier@2.2.1, prettier@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.2.1.tgz#795a1a78dd52f073da0cd42b21f9c91381923ff5"
   integrity sha512-PqyhM2yCjg/oKkFPtTGUojv7gnZAoG80ttl45O6x2Ug/rMJw4wcc9k6aaf2hibP7BGVCCM33gZoGjyvt9mm16Q==

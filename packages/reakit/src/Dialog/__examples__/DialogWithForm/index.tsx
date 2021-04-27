@@ -32,7 +32,7 @@ function RenameForm({ initialName = "", onRename }: Props) {
       <FormLabel {...form} name="name">
         New name
       </FormLabel>
-      <FormInput {...form} name="name" />
+      <FormInput {...form} name="name" type="password" />
       <FormMessage {...form} name="name" />
       <FormSubmitButton {...form}>Rename</FormSubmitButton>
     </Form>
